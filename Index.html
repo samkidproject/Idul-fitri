@@ -102,6 +102,11 @@
             pointer-events: none;
             z-index: 2;
         }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body>
@@ -145,7 +150,6 @@
                 </p>
                 <div class="flex flex-col items-center">
                     <div class="h-[1px] w-20 bg-yellow-600 mb-4"></div>
-                    <!-- Ukuran font Ibnu Rajab Al-Hanbali diperkecil menjadi text-[10px] -->
                     <p class="font-wedding text-yellow-500 font-bold uppercase tracking-[0.3em] text-[10px]">Ibnu Rajab Al-Hanbali</p>
                 </div>
             </div>
@@ -170,18 +174,11 @@
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Taqabbalallahu Minna Wa Minkum</span>
-            <!-- Repeat for loop -->
+            <!-- Duplikasi untuk animasi loop yang mulus -->
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
         </div>
     </div>
-
-    <style>
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-    </style>
 
     <script>
         function openInvitation() {
@@ -235,6 +232,7 @@
             });
             requestAnimationFrame(animate);
         }
+        
         initParticles();
         animate();
 
