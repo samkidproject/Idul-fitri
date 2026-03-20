@@ -103,9 +103,13 @@
             z-index: 2;
         }
 
+        /* Running Text */
         @keyframes scroll {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            animation: scroll 25s linear infinite;
         }
     </style>
 </head>
@@ -117,7 +121,8 @@
             <h1 class="font-signature text-7xl md:text-8xl text-white mb-4">Idul Fitri</h1>
             <p class="font-wedding tracking-[0.4em] text-yellow-500 mb-10 uppercase text-xs">1447 Hijriah</p>
             <div class="h-[1px] w-16 bg-yellow-600/50 mx-auto mb-10"></div>
-            <button class="btn-open uppercase text-xs" onclick="openInvitation()">Lihat Ucapan</button>
+            <!-- Perubahan: Label tombol diubah dari "Lihat Ucapan" menjadi "Buka" -->
+            <button class="btn-open uppercase text-xs" onclick="openInvitation()">Buka</button>
         </div>
     </div>
 
@@ -139,7 +144,9 @@
             <p class="font-wedding text-3xl text-yellow-200 mb-8 italic">1447 H</p>
             <div class="arabic text-5xl text-yellow-500 mb-10">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</div>
             <div class="h-16 w-[1px] bg-gradient-to-b from-yellow-600 to-transparent mx-auto mb-6"></div>
-            <p class="text-yellow-500 font-bold uppercase tracking-[0.2em] text-sm">Keluarga Didi & Pipit</p>
+            <p class="text-gray-400 italic text-[11px] max-w-sm mx-auto leading-relaxed">
+                "Semoga Allah menerima amal ibadah kami dan amal ibadah kalian."
+            </p>
         </div>
 
         <!-- Slide 2: Quote Ibnu Rajab -->
@@ -170,11 +177,10 @@
 
     <!-- Teks Berjalan di Bawah -->
     <div class="fixed bottom-0 w-full overflow-hidden bg-black/20 py-4 border-t border-yellow-900/30 z-50 backdrop-blur-sm">
-        <div class="whitespace-nowrap animate-[scroll_40s_linear_infinite] flex gap-24">
+        <div class="whitespace-nowrap animate-scroll flex gap-24">
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Taqabbalallahu Minna Wa Minkum</span>
-            <!-- Duplikasi untuk animasi loop yang mulus -->
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
             <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
         </div>
@@ -186,7 +192,6 @@
             startAutoScroll();
         }
 
-        // Particle System (Gold Dust)
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -236,7 +241,6 @@
         initParticles();
         animate();
 
-        // Slide Controller
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
