@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idul Fitri 1447 H - Keluarga Didi & Pipit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-gold: #B8860B;
+            --bg-dark: #011a14;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-dark);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: white;
+        }
+        .font-wedding { font-family: 'Playfair Display', serif; }
+        .font-signature { font-family: 'Pinyon Script', cursive; }
+        .arabic { font-family: 'Amiri', serif; }
+
+        /* Opening Overlay */
+        #opening-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #02362a 0%, #011a14 100%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #opening-overlay.hide { transform: translateY(-100%); }
+
+        /* Frame Ornamen */
+        .main-frame {
+            position: fixed;
+            inset: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+            z-index: 50;
+        }
+        .frame-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--primary-gold);
+        }
+        .top-left { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .top-right { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .bottom-left { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .bottom-right { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+        /* Slides */
+        .slide-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .slide {
+            position: absolute;
+            opacity: 0;
+            transition: all 1.5s ease;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        .slide.active { opacity: 1; transform: scale(1); }
+        .slide:not(.active) { transform: scale(0.98); }
+
+        .btn-open {
+            background: var(--primary-gold);
+            color: #011a14;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            border: 1px solid transparent;
+        }
+        .btn-open:hover {
+            transform: scale(1.05);
+            background: transparent;
+            color: var(--primary-gold);
+            border: 1px solid var(--primary-gold);
+        }
+
+        /* Particles */
+        #particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Pembuka -->
+    <div id="opening-overlay">
+        <div class="text-center p-12">
+            <h1 class="font-signature text-7xl md:text-8xl text-white mb-4">Idul Fitri</h1>
+            <p class="font-wedding tracking-[0.4em] text-yellow-500 mb-10 uppercase text-xs">1447 Hijriah</p>
+            <div class="h-[1px] w-16 bg-yellow-600/50 mx-auto mb-10"></div>
+            <button class="btn-open uppercase text-xs" onclick="openInvitation()">Lihat Ucapan</button>
+        </div>
+    </div>
+
+    <!-- Bingkai Minimalis -->
+    <div class="main-frame">
+        <div class="frame-corner top-left"></div>
+        <div class="frame-corner top-right"></div>
+        <div class="frame-corner bottom-left"></div>
+        <div class="frame-corner bottom-right"></div>
+    </div>
+
+    <canvas id="particles"></canvas>
+
+    <div class="slide-container">
+        <!-- Slide 1: Welcome -->
+        <div class="slide active" id="s1">
+            <p class="font-wedding text-yellow-500 tracking-[0.5em] mb-4 uppercase text-sm">Selamat Hari Raya</p>
+            <h2 class="font-signature text-7xl md:text-9xl text-white mb-6">Idul Fitri</h2>
+            <p class="font-wedding text-3xl text-yellow-200 mb-8 italic">1447 H</p>
+            <div class="arabic text-5xl text-yellow-500 mb-10">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</div>
+            <div class="h-16 w-[1px] bg-gradient-to-b from-yellow-600 to-transparent mx-auto mb-6"></div>
+            <p class="text-yellow-500 font-bold uppercase tracking-[0.2em] text-sm">Keluarga Didi & Pipit</p>
+        </div>
+
+        <!-- Slide 2: Quote Ibnu Rajab -->
+        <div class="slide" id="s2">
+            <div class="relative px-10">
+                <p class="font-wedding text-2xl md:text-4xl italic leading-relaxed text-white mb-10">
+                    "Bukanlah hari raya itu bagi orang yang memakai pakaian baru, akan tetapi hari raya itu bagi orang yang ketaatannya bertambah."
+                </p>
+                <div class="flex flex-col items-center">
+                    <div class="h-[1px] w-20 bg-yellow-600 mb-4"></div>
+                    <!-- Ukuran font Ibnu Rajab Al-Hanbali diperkecil menjadi text-[10px] -->
+                    <p class="font-wedding text-yellow-500 font-bold uppercase tracking-[0.3em] text-[10px]">Ibnu Rajab Al-Hanbali</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Personal Message -->
+        <div class="slide" id="s3">
+            <h3 class="font-wedding text-3xl text-yellow-500 mb-4 uppercase tracking-[0.3em]">Minal Aidin Wal Faizin</h3>
+            <p class="text-lg md:text-xl text-gray-300 mb-16 leading-relaxed font-light italic">
+                “Semoga kita termasuk orang-orang yang kembali (ke fitrah) dan meraih kemenangan.”
+            </p>
+            <div class="flex flex-col items-center">
+                <p class="text-[10px] text-yellow-700 tracking-[0.5em] mb-2 uppercase">Warmest Regards,</p>
+                <h2 class="font-signature text-4xl text-white">Didi & Pipit</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teks Berjalan di Bawah -->
+    <div class="fixed bottom-0 w-full overflow-hidden bg-black/20 py-4 border-t border-yellow-900/30 z-50 backdrop-blur-sm">
+        <div class="whitespace-nowrap animate-[scroll_40s_linear_infinite] flex gap-24">
+            <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
+            <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
+            <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Taqabbalallahu Minna Wa Minkum</span>
+            <!-- Repeat for loop -->
+            <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Keluarga Didi & Pipit Mengucapkan Selamat Idul Fitri 1447 H</span>
+            <span class="text-yellow-600/70 text-[10px] font-bold tracking-[0.3em] uppercase italic">Mohon Maaf Lahir dan Batin</span>
+        </div>
+    </div>
+
+    <style>
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+    </style>
+
+    <script>
+        function openInvitation() {
+            document.getElementById('opening-overlay').classList.add('hide');
+            startAutoScroll();
+        }
+
+        // Particle System (Gold Dust)
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = resize;
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = Math.random() * 0.4 + 0.1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > canvas.height) this.y = -10;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < 120; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        initParticles();
+        animate();
+
+        // Slide Controller
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function startAutoScroll() {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 7000);
+        }
+    </script>
+</body>
+</html>
+
